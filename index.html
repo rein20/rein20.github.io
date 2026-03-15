@@ -3,295 +3,582 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marko Kim - Personal Website</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
+    <title>Marko Kim - Homepage</title>
+    <meta name="description" content="Marko Kim — Senior AI Manager, LLM Research Engineer and Team Lead at Kakao Corp.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa; /* Light gray background */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #202023;
+            --bg-alpha: rgba(32,32,35,0.85);
+            --card: #2d2d30;
+            --text: #e2e8f0;
+            --text-dim: #a0aec0;
+            --heading: #f7fafc;
+            --accent: #81e6d9;
+            --accent2: #63b3ed;
+            --link: #ff63c3;
+            --section-bg: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.08);
+            --font: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
+
+        html.light {
+            --bg: #f0e7db;
+            --bg-alpha: rgba(240,231,219,0.85);
+            --card: #ffffff;
+            --text: #1a202c;
+            --text-dim: #4a5568;
+            --heading: #1a202c;
+            --accent: #319795;
+            --accent2: #3182ce;
+            --link: #d53f8c;
+            --section-bg: rgba(0,0,0,0.04);
+            --border: rgba(0,0,0,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 16px;
+            font-weight: 300;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: var(--bg-alpha);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 768px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; height: 56px;
+        }
+        .nav-logo {
+            font-weight: 700; font-size: 1.1rem;
+            color: var(--heading); text-decoration: none;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .nav-logo .logo-dot {
+            width: 20px; height: 20px; border-radius: 4px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+        }
+        .nav-links { display: flex; align-items: center; gap: 4px; }
+        .nav-links a {
+            color: var(--text-dim); text-decoration: none;
+            font-size: 0.9rem; font-weight: 500;
+            padding: 6px 12px; border-radius: 6px;
+            transition: color 0.2s, background 0.2s;
+        }
+        .nav-links a:hover { color: var(--heading); background: var(--section-bg); }
+        #theme-btn {
+            background: var(--section-bg); border: none;
+            width: 34px; height: 34px; border-radius: 8px;
+            cursor: pointer; color: var(--text-dim);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s; margin-left: 6px; font-size: 1.1rem;
+        }
+        #theme-btn:hover { color: var(--heading); background: var(--border); }
+
+        /* ── Container ── */
+        .container { max-width: 768px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── Hero ── */
+        .hero { text-align: center; padding: 48px 0 24px; }
+        .hero-img-wrap {
+            display: flex; justify-content: center; margin-bottom: 24px;
+        }
+        .hero-img-wrap img {
+            width: 100%; max-width: 480px; height: auto;
+            border-radius: 16px;
+            object-fit: cover;
+        }
+        .greeting {
+            display: inline-block;
+            background: var(--section-bg);
+            border-radius: 12px;
+            padding: 8px 20px;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 1.8rem; font-weight: 700;
+            color: var(--heading); margin-bottom: 2px;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem; color: var(--text-dim); margin-bottom: 16px;
+        }
+        .hero-stats {
+            display: flex; justify-content: center; gap: 24px;
+            flex-wrap: wrap; margin-bottom: 16px;
+        }
+        .hero-stats .stat {
+            text-align: center;
+        }
+        .hero-stats .num {
+            font-size: 1.4rem; font-weight: 700; color: var(--accent);
+            display: block;
+        }
+        .hero-stats .label {
+            font-size: 0.75rem; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .hero-photo {
+            display: flex; align-items: center; gap: 16px;
+            justify-content: center; margin-top: 8px;
+        }
+        .hero-photo img {
+            width: 80px; height: 80px; border-radius: 50%;
+            object-fit: cover; border: 3px solid var(--border);
+        }
+
+        /* ── Sections ── */
+        section { padding: 36px 0; }
         .section-title {
-            font-size: 1.5rem; /* 24px */
-            font-weight: 600;
-            color: #111827; /* gray-900 */
-            margin-bottom: 1.5rem; /* 24px */
-            border-bottom: 1px solid #e5e7eb; /* gray-200 */
-            padding-bottom: 0.75rem; /* 12px */
+            font-size: 1.25rem; font-weight: 700; color: var(--heading);
+            margin-bottom: 20px;
+            text-decoration: underline;
+            text-decoration-color: var(--text-dim);
+            text-underline-offset: 6px;
+            text-decoration-thickness: 3px;
+        }
+        .section-box {
+            background: var(--section-bg);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+        }
+        .section-box p {
+            text-indent: 1.5em;
+        }
+        .section-box .btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 12px;
+            background: var(--accent); color: #202023;
+            padding: 8px 20px; border-radius: 8px;
+            text-decoration: none; font-weight: 700; font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+        .section-box .btn:hover { opacity: 0.85; }
+
+        /* ── Bio Timeline ── */
+        .bio-list { display: flex; flex-direction: column; gap: 8px; }
+        .bio-row {
+            display: grid; grid-template-columns: 96px 1fr;
+            gap: 16px; align-items: baseline;
+        }
+        .bio-year {
+            font-weight: 700; color: var(--heading); text-align: right;
+            font-size: 0.9rem;
+        }
+        .bio-desc { font-size: 0.9rem; color: var(--text); }
+        .bio-desc a { color: var(--link); text-decoration: none; }
+        .bio-desc a:hover { text-decoration: underline; }
+
+        /* ── Experience cards ── */
+        .exp-list { display: flex; flex-direction: column; gap: 12px; }
+        .exp-card {
+            background: var(--section-bg);
+            border-radius: 12px; padding: 18px 22px;
+            display: grid; grid-template-columns: 44px 1fr; gap: 14px;
+            align-items: start;
+            transition: background 0.2s;
+        }
+        .exp-card:hover { background: var(--border); }
+        .exp-card .logo {
+            width: 40px; height: 40px; border-radius: 8px;
+            object-fit: contain; background: rgba(255,255,255,0.06);
+            padding: 4px;
+        }
+        html.light .exp-card .logo { background: rgba(0,0,0,0.04); }
+        .exp-card h3 {
+            font-size: 0.95rem; font-weight: 700; color: var(--heading);
+            margin-bottom: 2px;
+        }
+        .exp-card .meta {
+            font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px;
+        }
+        .exp-card .meta .badge {
+            background: rgba(129,230,217,0.15); color: var(--accent);
+            padding: 1px 8px; border-radius: 4px; font-size: 0.7rem;
+            font-weight: 700; margin-left: 8px;
+        }
+        html.light .exp-card .meta .badge { background: rgba(49,151,149,0.12); }
+        .exp-card .desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; }
+
+        /* ── Publications ── */
+        .pub-list { display: flex; flex-direction: column; gap: 10px; }
+        .pub-item {
+            display: grid; grid-template-columns: 44px 1fr; gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            align-items: start;
+        }
+        .pub-item:last-child { border: none; }
+        .pub-item .icon {
+            width: 40px; height: 40px; border-radius: 8px;
+            object-fit: contain; background: rgba(255,255,255,0.06); padding: 4px;
+        }
+        html.light .pub-item .icon { background: rgba(0,0,0,0.04); }
+        .pub-item h3 { font-size: 0.9rem; font-weight: 700; color: var(--heading); margin-bottom: 2px; }
+        .pub-item h3 a { color: var(--heading); text-decoration: none; }
+        .pub-item h3 a:hover { color: var(--link); }
+        .pub-item p { font-size: 0.82rem; color: var(--text-dim); }
+
+        /* ── Awards ── */
+        .awards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .award-card {
+            background: var(--section-bg); border-radius: 12px;
+            padding: 16px; display: flex; gap: 12px; align-items: start;
+            transition: background 0.2s;
+        }
+        .award-card:hover { background: var(--border); }
+        .award-card .icon {
+            width: 36px; height: 36px; border-radius: 8px;
+            object-fit: contain; flex-shrink: 0;
+        }
+        .award-card .year { font-size: 0.72rem; color: var(--accent); font-weight: 700; }
+        .award-card h3 { font-size: 0.85rem; font-weight: 700; color: var(--heading); margin-bottom: 1px; }
+        .award-card p { font-size: 0.78rem; color: var(--text-dim); }
+
+        /* ── Media cards ── */
+        .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .media-card {
+            background: var(--section-bg); border-radius: 12px;
+            overflow: hidden; transition: transform 0.2s;
+        }
+        .media-card:hover { transform: translateY(-3px); }
+        .media-card .thumb {
+            width: 100%; height: 160px; object-fit: cover; display: block;
+        }
+        .media-card iframe {
+            width: 100%; height: 160px; border: none; display: block;
+        }
+        .media-card .info { padding: 14px 16px; }
+        .media-card .info h3 { font-size: 0.9rem; font-weight: 700; color: var(--heading); margin-bottom: 4px; }
+        .media-card .info h3 a { color: var(--heading); text-decoration: none; }
+        .media-card .info h3 a:hover { color: var(--link); }
+        .media-card .info p { font-size: 0.8rem; color: var(--text-dim); }
+
+        /* ── On the web ── */
+        .web-links { display: flex; flex-direction: column; gap: 8px; }
+        .web-link {
+            display: flex; align-items: center; gap: 10px;
+            color: var(--link); text-decoration: none;
+            font-size: 0.9rem; font-weight: 500;
+            padding: 6px 0;
+        }
+        .web-link:hover { text-decoration: underline; }
+        .web-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+        /* ── Footer ── */
+        footer {
+            padding: 40px 0; text-align: center;
+            font-size: 0.8rem; color: var(--text-dim);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.5rem; }
+            .awards-grid { grid-template-columns: 1fr; }
+            .media-grid { grid-template-columns: 1fr; }
+            .bio-row { grid-template-columns: 80px 1fr; gap: 8px; }
+            .exp-card { grid-template-columns: 36px 1fr; }
+            .hero-stats { gap: 16px; }
         }
     </style>
 </head>
-<body class="text-gray-700">
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <span class="logo-dot"></span>
+                Marko Kim
+            </a>
+            <div class="nav-links">
+                <a href="#work">Work</a>
+                <a href="#experience">Experience</a>
+                <a href="#publications">Publications</a>
+                <a href="#media">Media</a>
+                <button id="theme-btn" aria-label="Toggle theme">🌙</button>
+            </div>
+        </div>
+    </nav>
 
-    <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8">
+    <div class="container">
 
-        <!-- Header Section -->
-        <header class="text-center mb-12">
-            <img src="images/profile-photo.png" alt="Marko Kim" class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-full object-cover mb-4 border-4 border-white shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/128x128/e2e8f0/64748b?text=MK';">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Marko Kim</h1>
-            <p class="text-lg text-gray-600 mt-1">LLM Research Engineer, Team Lead, Kakao Corp.</p>
-
-            <!-- Social Media Icons -->
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="https://www.linkedin.com/in/marko-kim" target="_blank" class="text-gray-500 hover:text-gray-800" aria-label="LinkedIn">
-                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                </a>
-                <a href="mailto:rein20.ai@gmail.com" class="text-gray-500 hover:text-gray-800" aria-label="Email">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                </a>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="hero-img-wrap">
+                <img src="images/media-appearance.png" alt="Featured in media" onerror="this.style.display='none'">
             </div>
 
-            <!-- About Me Text -->
-            <div class="max-w-3xl mx-auto mt-6">
-                <p class="text-lg font-medium text-gray-900 text-left md:text-center mb-3">
-                    Senior AI Manager specializing in Large Language Models and AI Systems at Scale
+            <div class="greeting">Hello, I'm an AI research leader based in Korea!</div>
+
+            <div class="hero-photo">
+                <img src="images/profile-photo.png" alt="Marko Kim" onerror="this.onerror=null;this.src='https://placehold.co/80x80/2d2d30/e2e8f0?text=MK';">
+                <div>
+                    <h1>Marko Kim</h1>
+                    <p class="subtitle">LLM Research Engineer / Team Lead / AI Builder</p>
+                </div>
+            </div>
+
+            <div class="hero-stats" style="margin-top: 24px;">
+                <div class="stat"><span class="num">11</span><span class="label">AI Services</span></div>
+                <div class="stat"><span class="num">40M+</span><span class="label">Users</span></div>
+                <div class="stat"><span class="num">$285M</span><span class="label">Revenue</span></div>
+            </div>
+        </div>
+
+        <!-- Work -->
+        <section id="work">
+            <h2 class="section-title">Work</h2>
+            <div class="section-box">
+                <p>
+                    Marko is a Senior AI Manager at <a href="https://www.kakaocorp.com" style="color:var(--link)">Kakao Corp.</a>,
+                    leading both the AI Alignment team and the Search Agent task force.
+                    His expertise spans the full LLM lifecycle — from continuous pretraining and fine-tuning
+                    to reinforcement learning and inference optimization, covering models from 8B to 600B+ parameters.
+                    He has successfully launched 11 generative AI services serving millions of users across Korea's largest platforms.
                 </p>
-                <!-- Business Impact Metrics -->
-                <div class="flex flex-col md:flex-row md:justify-center md:space-x-8 text-left md:text-center mb-4">
-                    <div class="flex items-center mb-2 md:mb-0">
-                        <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                        <span class="text-gray-700"><span class="font-semibold">11</span> AI Services Launched</span>
-                    </div>
-                    <div class="flex items-center mb-2 md:mb-0">
-                        <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                        <span class="text-gray-700"><span class="font-semibold">40M+</span> Active Users</span>
-                    </div>
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span class="text-gray-700"><span class="font-semibold">$285M</span> Revenue Impact</span>
-                    </div>
-                </div>
-
+                <a href="https://www.linkedin.com/in/marko-kim" target="_blank" class="btn">
+                    My LinkedIn ›
+                </a>
             </div>
-        </header>
+        </section>
 
-        <main>
-            <!-- Work Experience Section -->
-            <section class="mb-12">
-                <h2 class="section-title">Work Experience</h2>
-                <div class="relative border-l-2 border-gray-200 ml-3">
-                    <!-- Timeline Item 1: Kakao -->
-                    <div class="mb-10 ml-8">
-                        <img src="images/kakao-logo.png" alt="Kakao Logo" class="absolute w-8 h-8 bg-white rounded-full -left-4 ring-8 ring-white object-contain" onerror="this.onerror=null;this.src='https://placehold.co/32x32/ffffff/000000?text=K'">
-                        <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900">
-                            TF Lead, Search Agent TF
-                            <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">Present</span>
-                        </h3>
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-500">KAKAO CORP. | Aug 2025 - Present</time>
-                        <p class="mb-4 text-base font-normal text-gray-600">
-                            Making sure LLM has the context at the right timing (Concurrent role with AI Alignment Team Lead).
-                            Reporting directly to CEO, Shina Chung.
-                        </p>
-                    </div>
-                    <!-- Timeline Item 2: Kakao -->
-                    <div class="mb-10 ml-8">
-                        <img src="images/kakao-logo.png" alt="Kakao Logo" class="absolute w-8 h-8 bg-white rounded-full -left-4 ring-8 ring-white object-contain" onerror="this.onerror=null;this.src='https://placehold.co/32x32/ffffff/000000?text=K'">
-                        <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900">
-                            Team Lead, AI Alignment
-                            <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">Present</span>
-                        </h3>
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-500">KAKAO CORP. | Apr 2024 - Present</time>
-                        <p class="mb-4 text-base font-normal text-gray-600">
-                            Leading full-stack LLM research covering continuous pretraining, supervised fine-tuning, reinforcement learning, and inference optimization.
-                            Hands-on experience training and serving models from 8B-600B+ parameters for server deployment and sub-4B models for on-device applications.
-                            Successfully launched 11 Generative AI services including AI Shopping Mate, AI Local Mate, and Kakaoshoppinglive AI, serving millions of users.
-                        </p>
-                    </div>
-                    <!-- Timeline Item 3: Kakao -->
-                    <div class="mb-10 ml-8">
-                        <img src="images/kakao-logo.png" alt="Kakao Logo" class="absolute w-8 h-8 bg-white rounded-full -left-4 ring-8 ring-white object-contain" onerror="this.onerror=null;this.src='https://placehold.co/32x32/ffffff/000000?text=K'">
-                        <h3 class="mb-1 text-lg font-semibold text-gray-900">Part Lead, Generative AI</h3>
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-500">KAKAO CORP. | Oct 2023 - Mar 2024</time>
-                        <p class="text-base font-normal text-gray-600">
-                            Led company-wide LLM strategy PoC, developing a summarization model achieving 80.3% performance parity with ChatGPT using a small-sized open-source LLM.
-                            Delivered 7 production-ready demos in 3 months, including Korea's first AI baseball chatbot service.
-                        </p>
-                    </div>
-                    <!-- Timeline Item 4: Kakao -->
-                    <div class="mb-10 ml-8">
-                        <img src="images/kakao-logo.png" alt="Kakao Logo" class="absolute w-8 h-8 bg-white rounded-full -left-4 ring-8 ring-white object-contain" onerror="this.onerror=null;this.src='https://placehold.co/32x32/ffffff/000000?text=K'">
-                        <h3 class="mb-1 text-lg font-semibold text-gray-900">Cell Lead, Recommendation</h3>
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-500">KAKAO CORP. | Oct 2021 - Sep 2023</time>
-                        <p class="text-base font-normal text-gray-600">
-                            Served as Technical Lead for KakaoTalk's largest gift service renovation (MAU 26M), implementing product and price range recommendations with explanation generation, driving 10.5% of Gift's $2.7B revenue.
-                            Led the first deep learning recommendation model development across 7 major services, achieving record-breaking improvements.
-                        </p>
-                    </div>
-                     <!-- Timeline Item 5: Kakao -->
-                    <div class="mb-10 ml-8">
-                        <img src="images/kakao-logo.png" alt="Kakao Logo" class="absolute w-8 h-8 bg-white rounded-full -left-4 ring-8 ring-white object-contain" onerror="this.onerror=null;this.src='https://placehold.co/32x32/ffffff/000000?text=K'">
-                        <h3 class="mb-1 text-lg font-semibold text-gray-900">Research Engineer</h3>
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-500">KAKAO CORP. | Sep 2019 - Sep 2021</time>
-                        <p class="text-base font-normal text-gray-600">
-                            Developed and deployed a fully customized, transformer-based product categorization model for 100M+ e-commerce items,
-                            achieving 10x faster training than Google BERT and improving F0.5 score by +2%p.
-                        </p>
-                    </div>
-                    <!-- Timeline Item 6: Tanggoal -->
-                    <div class="mb-10 ml-8">
-                        <img src="images/tanggoal-logo.png" alt="Tanggoal Inc. Logo" class="absolute w-8 h-8 bg-white rounded-full -left-4 ring-8 ring-white object-contain" onerror="this.onerror=null;this.src='https://placehold.co/32x32/ffffff/000000?text=T'">
-                        <h3 class="mb-1 text-lg font-semibold text-gray-900">Co-Founder, Business Strategy</h3>
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-500">TANGGOAL INC. | Dec 2014 - Feb 2016</time>
-                        <p class="text-base font-normal text-gray-600">
-                            Co-founded a mobile health app, growing the user base from 1,000 to 50,000 in 3 months
-                            and securing over $100,000 in NY-based VC and ROK government funding.
-                        </p>
+        <!-- Bio -->
+        <section id="bio">
+            <h2 class="section-title">Bio</h2>
+            <div class="bio-list">
+                <div class="bio-row">
+                    <span class="bio-year">2025 –</span>
+                    <span class="bio-desc">TF Lead, Search Agent TF at Kakao (reporting to CEO)</span>
+                </div>
+                <div class="bio-row">
+                    <span class="bio-year">2024 –</span>
+                    <span class="bio-desc">Team Lead, AI Alignment at Kakao</span>
+                </div>
+                <div class="bio-row">
+                    <span class="bio-year">2023</span>
+                    <span class="bio-desc">Part Lead, Generative AI — led company-wide LLM strategy</span>
+                </div>
+                <div class="bio-row">
+                    <span class="bio-year">2021 – 2023</span>
+                    <span class="bio-desc">Cell Lead, Recommendation — KakaoTalk Gift (MAU 26M)</span>
+                </div>
+                <div class="bio-row">
+                    <span class="bio-year">2019 – 2021</span>
+                    <span class="bio-desc">Research Engineer at Kakao — Transformer-based product categorization</span>
+                </div>
+                <div class="bio-row">
+                    <span class="bio-year">2014 – 2016</span>
+                    <span class="bio-desc">Co-Founded <a href="#">Tanggoal Inc.</a> — mobile health app, 50K users, $100K+ funding</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience (detailed) -->
+        <section id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="exp-list">
+                <div class="exp-card">
+                    <img src="images/kakao-logo.png" alt="Kakao" class="logo" onerror="this.onerror=null;this.style.display='none'">
+                    <div>
+                        <h3>TF Lead, Search Agent TF</h3>
+                        <div class="meta">Kakao Corp. · Aug 2025 – Present <span class="badge">Current</span></div>
+                        <div class="desc">Making sure LLM has the context at the right timing. Concurrent role with AI Alignment Team Lead. Reporting directly to CEO.</div>
                     </div>
                 </div>
-            </section>
-
-
-            <!-- Publications & Patents Section -->
-            <section class="mb-12">
-                <h2 class="section-title">Publications & Patents</h2>
-                <div class="space-y-6">
-                    <!-- Publication Item 1 -->
-                    <div class="flex items-start space-x-4">
-                        <img src="images/acl-logo.png" alt="ACL Logo" class="w-12 h-12 bg-white rounded-lg flex-shrink-0 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/1f2937/ffffff?text=A';">
-                        <div>
-                            <h3 class="font-semibold text-gray-900">
-                                <a href="https://arxiv.org/abs/2505.23006v1" target="_blank" class="hover:underline">ACL 2025: A Practical Approach for Building Production-Grade Conversational Agents</a>
-                            </h3>
-                            <p class="text-sm text-gray-500">Corresponding author and Technical Lead for a paper accepted to the ACL 2025 Industry Track.</p>
-                        </div>
-                    </div>
-                     <!-- Patent Item 1 -->
-                    <div class="flex items-start space-x-4">
-                        <img src="images/patent-logo.png" alt="Patent Logo" class="w-12 h-12 bg-white rounded-lg flex-shrink-0 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/6d28d9/ffffff?text=P';">
-                        <div>
-                            <h3 class="font-semibold text-gray-900">Method, Server and User Terminal for Product Recommendation (2 Patents)</h3>
-                            <p class="text-sm text-gray-500">Filed in KR, US, and JP (2023). Covers novel methods for providing personalized product recommendations.</p>
-                        </div>
-                    </div>
-                    <!-- Publication Item 2 -->
-                    <div class="flex items-start space-x-4">
-                        <img src="images/kdd-logo.png" alt="KDD Logo" class="w-12 h-12 bg-white rounded-lg flex-shrink-0 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/1f2937/ffffff?text=K';">
-                        <div>
-                            <h3 class="font-semibold text-gray-900">
-                                <a href="https://amazonkddcup.github.io/" target="_blank" class="hover:underline">KDD Cup 2022: Predicting Query-Item Relationship using Adversarial Training</a>
-                            </h3>
-                            <p class="text-sm text-gray-500">Co-authored paper on robust modeling techniques, presented at the KDD Cup 2022 Workshop.</p>
-                        </div>
-                    </div>
-                    <!-- Publication Item 3 -->
-                    <div class="flex items-start space-x-4">
-                        <img src="images/ifkakao-logo.png" alt="if(kakao) Logo" class="w-12 h-12 bg-white rounded-lg flex-shrink-0 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/1f2937/ffffff?text=i';">
-                        <div>
-                            <h3 class="font-semibold text-gray-900">
-                                <a href="#" class="hover:underline">if(kakao) 2021: Building a BERT Model 10x Faster than Google</a>
-                            </h3>
-                            <p class="text-sm text-gray-500">Presented techniques for building a highly efficient and accurate BERT-like model at a major tech conference.</p>
-                        </div>
+                <div class="exp-card">
+                    <img src="images/kakao-logo.png" alt="Kakao" class="logo" onerror="this.onerror=null;this.style.display='none'">
+                    <div>
+                        <h3>Team Lead, AI Alignment</h3>
+                        <div class="meta">Kakao Corp. · Apr 2024 – Present <span class="badge">Current</span></div>
+                        <div class="desc">Leading full-stack LLM research: pretraining, SFT, RL, and inference optimization. Training and serving 8B–600B+ models. Launched 11 GenAI services including AI Shopping Mate, AI Local Mate, and Kakaoshoppinglive AI.</div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Awards Section -->
-            <section class="mb-12">
-                <h2 class="section-title">Awards</h2>
-                <div class="space-y-6">
-                    <!-- Award Item 1 -->
-                    <div class="flex items-start space-x-4">
-                        <img src="images/kaggle-logo.png" alt="Kaggle Logo" class="w-12 h-12 bg-white rounded-lg flex-shrink-0 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/f59e0b/ffffff?text=K';">
-                        <div>
-                            <h3 class="font-semibold text-gray-900">Kaggle Competitions Expert <span class="text-sm font-normal text-gray-500 ml-2">2023</span></h3>
-                            <p class="text-sm text-gray-600">Top 0.5% Globally. 2x Silver Medals in Stable Diffusion & Age-Related Conditions competitions.</p>
-                        </div>
-                    </div>
-                    <!-- Award Item 2 -->
-                    <div class="flex items-start space-x-4">
-                        <img src="images/neurips-logo.png" alt="NeurIPS Logo" class="w-12 h-12 bg-white rounded-lg flex-shrink-0 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/f59e0b/ffffff?text=N';">
-                        <div>
-                            <h3 class="font-semibold text-gray-900">NeurIPS IGLU Challenge <span class="text-sm font-normal text-gray-500 ml-2">2022</span></h3>
-                            <p class="text-sm text-gray-600">6th Place out of 54 teams in the NLP Task.</p>
-                        </div>
-                    </div>
-                     <!-- Award Item 3 -->
-                    <div class="flex items-start space-x-4">
-                        <img src="images/amazon-logo.png" alt="Amazon Logo" class="w-12 h-12 bg-white rounded-lg flex-shrink-0 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/f59e0b/ffffff?text=A';">
-                        <div>
-                            <h3 class="font-semibold text-gray-900">Amazon KDD Cup <span class="text-sm font-normal text-gray-500 ml-2">2022</span></h3>
-                            <p class="text-sm text-gray-600">Top 10 Winner out of 273 teams in Product Substitution Classification (NLP).</p>
-                        </div>
-                    </div>
-                    <!-- Award Item 4 -->
-                     <div class="flex items-start space-x-4">
-                        <img src="images/dacon-logo.png" alt="DACON Logo" class="w-12 h-12 bg-white rounded-lg flex-shrink-0 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/48x48/f59e0b/ffffff?text=D';">
-                        <div>
-                            <h3 class="font-semibold text-gray-900">DACON & National AI Competitions <span class="text-sm font-normal text-gray-500 ml-2">2020 - 2021</span></h3>
-                            <p class="text-sm text-gray-600">Multiple 2nd place finishes in NLP, Vision, and Financial Volatility Prediction tasks.</p>
-                        </div>
+                <div class="exp-card">
+                    <img src="images/kakao-logo.png" alt="Kakao" class="logo" onerror="this.onerror=null;this.style.display='none'">
+                    <div>
+                        <h3>Part Lead, Generative AI</h3>
+                        <div class="meta">Kakao Corp. · Oct 2023 – Mar 2024</div>
+                        <div class="desc">Led company-wide LLM strategy PoC. Developed summarization model achieving 80.3% ChatGPT parity with small open-source LLM. Delivered 7 production-ready demos in 3 months including Korea's first AI baseball chatbot.</div>
                     </div>
                 </div>
-            </section>
-
-            <!-- In The Media Section -->
-            <section class="mb-12">
-                <h2 class="section-title">In The Media</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                        <a href="#" target="_blank">
-                            <img src="images/media-appearance.png" alt="Featured in JoongAng Ilbo" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/500x300/1d4ed8/ffffff?text=Media+Appearance';">
-                        </a>
-                        <div class="p-6">
-                            <h3 class="font-semibold text-gray-900 text-lg">
-                                <a href="#" target="_blank" class="hover:underline">Featured in JoongAng Ilbo</a>
-                            </h3>
-                            <p class="text-sm text-gray-600 mt-2">Discussed the development and launch of Kakao's first AI Chatbot Service, AI Shopping Mate, in one of Korea's largest newspapers.</p>
-                        </div>
+                <div class="exp-card">
+                    <img src="images/kakao-logo.png" alt="Kakao" class="logo" onerror="this.onerror=null;this.style.display='none'">
+                    <div>
+                        <h3>Cell Lead, Recommendation</h3>
+                        <div class="meta">Kakao Corp. · Oct 2021 – Sep 2023</div>
+                        <div class="desc">Technical Lead for KakaoTalk Gift renovation (MAU 26M). Product and price recommendations with explanation generation, driving 10.5% of Gift's $2.7B revenue.</div>
                     </div>
                 </div>
-            </section>
-
-             <!-- Lectures & Mentorship Section -->
-            <section class="mb-12">
-                <h2 class="section-title">Lectures & Mentorship</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Card 1: Lecture -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                        <iframe class="w-full h-48" src="https://www.youtube.com/embed/1tw5StbHD2Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <div class="p-6 flex-grow">
-                            <h3 class="font-semibold text-gray-900">
-                                <a href="https://fastcampus.co.kr/pages/75232" target="_blank" class="hover:underline">Developing AI/LLM Services with Prompt Engineering</a>
-                            </h3>
-                            <p class="text-sm text-gray-600 mt-2">A popular 20-hour paid lecture series on Fast Campus with over 1,000 students, teaching how to build 9 different projects from chatbots to AI agents.</p>
-                        </div>
-                    </div>
-                    <!-- Card 2: Mentorship -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                        <a href="https://fastcampus.co.kr/pages/75232" target="_blank">
-                            <img src="images/mentorship-program.png" alt="Mentorship Program Image" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/500x300/8b5cf6/ffffff?text=Mentorship+Program';">
-                        </a>
-                        <div class="p-6 flex-grow">
-                             <h3 class="font-semibold text-gray-900">
-                                <a href="https://fastcampus.co.kr/pages/75232" target="_blank" class="hover:underline">Mentor, AI Chatbot Program</a>
-                            </h3>
-                            <p class="text-sm text-gray-600 mt-2">Conducted weekly mentoring sessions for engineers and product managers, guiding them in the development of production-level AI chatbots.</p>
-                        </div>
+                <div class="exp-card">
+                    <img src="images/kakao-logo.png" alt="Kakao" class="logo" onerror="this.onerror=null;this.style.display='none'">
+                    <div>
+                        <h3>Research Engineer</h3>
+                        <div class="meta">Kakao Corp. · Sep 2019 – Sep 2021</div>
+                        <div class="desc">Transformer-based product categorization for 100M+ items. 10x faster training than Google BERT, +2%p F0.5 improvement.</div>
                     </div>
                 </div>
-            </section>
+                <div class="exp-card">
+                    <img src="images/tanggoal-logo.png" alt="Tanggoal" class="logo" onerror="this.onerror=null;this.style.display='none'">
+                    <div>
+                        <h3>Co-Founder, Business Strategy</h3>
+                        <div class="meta">Tanggoal Inc. · Dec 2014 – Feb 2016</div>
+                        <div class="desc">Mobile health app. Grew 1K → 50K users in 3 months. Secured $100K+ in NY-based VC and ROK government funding.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        </main>
+        <!-- Publications & Patents -->
+        <section id="publications">
+            <h2 class="section-title">Publications & Patents</h2>
+            <div class="pub-list">
+                <div class="pub-item">
+                    <img src="images/acl-logo.png" alt="ACL" class="icon" onerror="this.onerror=null;this.style.background='var(--section-bg)';this.alt='ACL'">
+                    <div>
+                        <h3><a href="https://arxiv.org/abs/2505.23006v1" target="_blank">ACL 2025: Production-Grade Conversational Agents</a></h3>
+                        <p>Corresponding author. Accepted to ACL 2025 Industry Track.</p>
+                    </div>
+                </div>
+                <div class="pub-item">
+                    <img src="images/patent-logo.png" alt="Patent" class="icon" onerror="this.onerror=null;this.style.background='var(--section-bg)'">
+                    <div>
+                        <h3>Product Recommendation Method (2 Patents)</h3>
+                        <p>Filed in KR, US, JP (2023). Novel personalized recommendation methods.</p>
+                    </div>
+                </div>
+                <div class="pub-item">
+                    <img src="images/kdd-logo.png" alt="KDD" class="icon" onerror="this.onerror=null;this.style.background='var(--section-bg)'">
+                    <div>
+                        <h3><a href="https://amazonkddcup.github.io/" target="_blank">KDD Cup 2022: Query-Item Relationship via Adversarial Training</a></h3>
+                        <p>Co-authored. Presented at KDD Cup 2022 Workshop.</p>
+                    </div>
+                </div>
+                <div class="pub-item">
+                    <img src="images/ifkakao-logo.png" alt="if(kakao)" class="icon" onerror="this.onerror=null;this.style.background='var(--section-bg)'">
+                    <div>
+                        <h3>if(kakao) 2021: BERT Model 10x Faster than Google</h3>
+                        <p>Efficient BERT-like model training techniques at major tech conference.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Footer -->
-        <footer class="text-center text-gray-500 text-sm mt-16 py-6 border-t border-gray-200">
+        <!-- Awards -->
+        <section id="awards">
+            <h2 class="section-title">Awards</h2>
+            <div class="awards-grid">
+                <div class="award-card">
+                    <img src="images/kaggle-logo.png" alt="Kaggle" class="icon" onerror="this.onerror=null;this.textContent='🏆'">
+                    <div>
+                        <div class="year">2023</div>
+                        <h3>Kaggle Expert</h3>
+                        <p>Top 0.5% globally. 2× Silver Medals.</p>
+                    </div>
+                </div>
+                <div class="award-card">
+                    <img src="images/neurips-logo.png" alt="NeurIPS" class="icon" onerror="this.onerror=null;this.textContent='🧠'">
+                    <div>
+                        <div class="year">2022</div>
+                        <h3>NeurIPS IGLU</h3>
+                        <p>6th / 54 teams, NLP Task.</p>
+                    </div>
+                </div>
+                <div class="award-card">
+                    <img src="images/amazon-logo.png" alt="Amazon" class="icon" onerror="this.onerror=null;this.textContent='📦'">
+                    <div>
+                        <div class="year">2022</div>
+                        <h3>Amazon KDD Cup</h3>
+                        <p>Top 10 / 273 teams in NLP.</p>
+                    </div>
+                </div>
+                <div class="award-card">
+                    <img src="images/dacon-logo.png" alt="DACON" class="icon" onerror="this.onerror=null;this.textContent='🥈'">
+                    <div>
+                        <div class="year">2020–21</div>
+                        <h3>DACON & National AI</h3>
+                        <p>Multiple 2nd places in NLP, Vision, Finance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media & Lectures -->
+        <section id="media">
+            <h2 class="section-title">Media & Lectures</h2>
+            <div class="media-grid">
+                <div class="media-card">
+                    <img src="images/media-appearance.png" alt="JoongAng Ilbo" class="thumb" onerror="this.onerror=null;this.src='https://placehold.co/400x200/2d2d30/a0aec0?text=Media';">
+                    <div class="info">
+                        <h3><a href="#">Featured in JoongAng Ilbo</a></h3>
+                        <p>Development and launch of Kakao's AI Shopping Mate chatbot.</p>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <iframe src="https://www.youtube.com/embed/1tw5StbHD2Q" title="Lecture" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    <div class="info">
+                        <h3><a href="https://fastcampus.co.kr/pages/75232" target="_blank">AI/LLM Prompt Engineering</a></h3>
+                        <p>20-hour lecture on Fast Campus. 1,000+ students. 9 projects.</p>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <img src="images/mentorship-program.png" alt="Mentorship" class="thumb" onerror="this.onerror=null;this.src='https://placehold.co/400x200/2d2d30/a0aec0?text=Mentorship';">
+                    <div class="info">
+                        <h3><a href="https://fastcampus.co.kr/pages/75232" target="_blank">AI Chatbot Mentorship</a></h3>
+                        <p>Weekly sessions for engineers and PMs on production AI chatbots.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- On the web -->
+        <section>
+            <h2 class="section-title">On the web</h2>
+            <div class="web-links">
+                <a href="https://www.linkedin.com/in/marko-kim" target="_blank" class="web-link">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    @marko-kim
+                </a>
+                <a href="mailto:rein20.ai@gmail.com" class="web-link">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    rein20.ai@gmail.com
+                </a>
+            </div>
+        </section>
+
+        <footer>
             <p>&copy; 2025 Marko Kim. All Rights Reserved.</p>
-            <p class="mt-1">Built with HTML & Tailwind CSS.</p>
         </footer>
-
     </div>
+
+    <script>
+        const btn = document.getElementById('theme-btn');
+        const html = document.documentElement;
+
+        function setTheme(light) {
+            html.classList.toggle('light', light);
+            btn.textContent = light ? '🌙' : '☀️';
+            localStorage.setItem('theme', light ? 'light' : 'dark');
+        }
+
+        btn.addEventListener('click', () => setTheme(!html.classList.contains('light')));
+
+        // Default: dark. Respect saved preference.
+        if (localStorage.getItem('theme') === 'light') setTheme(true);
+    </script>
 </body>
 </html>
